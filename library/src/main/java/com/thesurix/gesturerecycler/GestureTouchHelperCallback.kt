@@ -35,6 +35,9 @@ class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *
     }
 
     override fun onMove(recyclerView: RecyclerView, source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        if (target.adapterPosition == 0) {
+            return false
+        }
         return gestureAdapter.onItemMove(source.adapterPosition, target.adapterPosition)
     }
 
