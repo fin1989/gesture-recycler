@@ -13,6 +13,8 @@ import com.thesurix.gesturerecycler.LayoutFlags.*
  */
 class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *>) : ItemTouchHelper.Callback() {
 
+    /** Flag that is blocking first item, so other could not be moved over it*/
+    var firstItemBlocked = false
     /** Flag that enables or disables swipe gesture  */
     var swipeEnabled = false
     /** Flag that enables or disables manual drag gesture  */
@@ -35,8 +37,10 @@ class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *
     }
 
     override fun onMove(recyclerView: RecyclerView, source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        if (target.adapterPosition == 0) {
-            return false
+        if (firstItemBlocked) {
+            if (target.adapterPosition == 0) {
+                return false
+            }
         }
         return gestureAdapter.onItemMove(source.adapterPosition, target.adapterPosition)
     }

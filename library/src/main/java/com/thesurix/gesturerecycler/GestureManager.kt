@@ -16,6 +16,7 @@ class GestureManager {
     private constructor(builder: Builder) {
         val adapter = builder.recyclerView.adapter as GestureAdapter<Any, *>
         touchHelperCallback = GestureTouchHelperCallback(adapter).apply {
+            firstItemBlocked = builder.isFirstItemBlocked
             swipeEnabled = builder.isSwipeEnabled
             longPressDragEnabled = builder.isDragEnabled
             manualDragEnabled = builder.isManualDragEnabled
@@ -90,12 +91,24 @@ class GestureManager {
             private set
         internal var dragFlags = INVALID_FLAG
             private set
+        internal var isFirstItemBlocked = false
+            private set
         internal var isSwipeEnabled = false
             private set
         internal var isDragEnabled = false
             private set
         internal var isManualDragEnabled = false
             private set
+
+        /**
+         * Sets first item to be blocked from moving other above it.
+         * @param enabled true to block, false to unblock
+         * @return returns builder instance
+         */
+        fun setFirstItemBlocked(enabled: Boolean): Builder {
+            isFirstItemBlocked = enabled
+            return this
+        }
 
         /**
          * Sets swipe gesture enabled or disabled.
