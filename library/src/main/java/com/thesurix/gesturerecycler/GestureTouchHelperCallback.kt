@@ -15,6 +15,10 @@ class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *
 
     /** Flag that is blocking first item, so other could not be moved over it*/
     var firstItemBlocked = false
+    /** Flag that is blocking first item, so other could not be moved over it*/
+    var secondItemBlocked = false
+    /** Flag that is blocking first item, so other could not be moved over it*/
+    var thirdItemBlocked = false
     /** Flag that enables or disables swipe gesture  */
     var swipeEnabled = false
     /** Flag that enables or disables manual drag gesture  */
@@ -39,6 +43,16 @@ class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *
     override fun onMove(recyclerView: RecyclerView, source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         if (firstItemBlocked) {
             if (target.adapterPosition == 0) {
+                return false
+            }
+        }
+        if (secondItemBlocked) {
+            if (target.adapterPosition == 1) {
+                return false
+            }
+        }
+        if (thirdItemBlocked) {
+            if (target.adapterPosition == 2) {
                 return false
             }
         }
