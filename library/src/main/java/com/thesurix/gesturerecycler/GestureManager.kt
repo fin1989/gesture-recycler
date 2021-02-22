@@ -16,9 +16,10 @@ class GestureManager {
     private constructor(builder: Builder) {
         val adapter = builder.recyclerView.adapter as GestureAdapter<Any, *>
         touchHelperCallback = GestureTouchHelperCallback(adapter).apply {
-            firstItemBlocked = builder.isFirstItemBlocked
+            /*firstItemBlocked = builder.isFirstItemBlocked
             secondItemBlocked = builder.isSecondItemBlocked
-            thirdItemBlocked = builder.isThirdItemBlocked
+            thirdItemBlocked = builder.isThirdItemBlocked*/
+            listOfBlockedItems = builder.listOfBlockedItems
             swipeEnabled = builder.isSwipeEnabled
             longPressDragEnabled = builder.isDragEnabled
             manualDragEnabled = builder.isManualDragEnabled
@@ -93,11 +94,13 @@ class GestureManager {
             private set
         internal var dragFlags = INVALID_FLAG
             private set
-        internal var isFirstItemBlocked = false
+        /*internal var isFirstItemBlocked = false
             private set
         internal var isSecondItemBlocked = false
             private set
         internal var isThirdItemBlocked = false
+            private set*/
+        internal var listOfBlockedItems = arrayListOf<Int>()
             private set
         internal var isSwipeEnabled = false
             private set
@@ -111,28 +114,38 @@ class GestureManager {
          * @param enabled true to block, false to unblock
          * @return returns builder instance
          */
-        fun setFirstItemBlocked(enabled: Boolean): Builder {
+        /*fun setFirstItemBlocked(enabled: Boolean): Builder {
             isFirstItemBlocked = enabled
             return this
-        }
+        }*/
 
         /**
          * Sets second item to be blocked from moving other above it.
          * @param enabled true to block, false to unblock
          * @return returns builder instance
          */
-        fun setSecondItemBlocked(enabled: Boolean): Builder {
+        /*fun setSecondItemBlocked(enabled: Boolean): Builder {
             isSecondItemBlocked = enabled
             return this
-        }
+        }*/
 
         /**
          * Sets third item to be blocked from moving other above it.
          * @param enabled true to block, false to unblock
          * @return returns builder instance
          */
-        fun setThirdItemBlocked(enabled: Boolean): Builder {
+        /*fun setThirdItemBlocked(enabled: Boolean): Builder {
             isThirdItemBlocked = enabled
+            return this
+        }*/
+
+        /**
+         * Sets list of items to be blocked from moving other above them.
+         * @param listOfBlockedIndexes
+         * @return returns builder instance
+         */
+        fun setListOfBlockedItems(listOfBlockedIndexes: ArrayList<Int>): Builder {
+            listOfBlockedItems = listOfBlockedIndexes
             return this
         }
 
