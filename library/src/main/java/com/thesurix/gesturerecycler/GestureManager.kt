@@ -16,9 +16,6 @@ class GestureManager {
     private constructor(builder: Builder) {
         val adapter = builder.recyclerView.adapter as GestureAdapter<Any, *>
         touchHelperCallback = GestureTouchHelperCallback(adapter).apply {
-            /*firstItemBlocked = builder.isFirstItemBlocked
-            secondItemBlocked = builder.isSecondItemBlocked
-            thirdItemBlocked = builder.isThirdItemBlocked*/
             listOfBlockedItems = builder.listOfBlockedItems
             swipeEnabled = builder.isSwipeEnabled
             longPressDragEnabled = builder.isDragEnabled
@@ -108,36 +105,6 @@ class GestureManager {
             private set
         internal var isManualDragEnabled = false
             private set
-
-        /**
-         * Sets first item to be blocked from moving other above it.
-         * @param enabled true to block, false to unblock
-         * @return returns builder instance
-         */
-        /*fun setFirstItemBlocked(enabled: Boolean): Builder {
-            isFirstItemBlocked = enabled
-            return this
-        }*/
-
-        /**
-         * Sets second item to be blocked from moving other above it.
-         * @param enabled true to block, false to unblock
-         * @return returns builder instance
-         */
-        /*fun setSecondItemBlocked(enabled: Boolean): Builder {
-            isSecondItemBlocked = enabled
-            return this
-        }*/
-
-        /**
-         * Sets third item to be blocked from moving other above it.
-         * @param enabled true to block, false to unblock
-         * @return returns builder instance
-         */
-        /*fun setThirdItemBlocked(enabled: Boolean): Builder {
-            isThirdItemBlocked = enabled
-            return this
-        }*/
 
         /**
          * Sets list of items to be blocked from moving other above them.

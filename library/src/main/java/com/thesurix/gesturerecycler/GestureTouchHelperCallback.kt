@@ -43,24 +43,9 @@ class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *
     }
 
     override fun onMove(recyclerView: RecyclerView, source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        if (listOfBlockedItems.contains(target.adapterPosition)) {
+        if (listOfBlockedItems.contains(target.adapterPosition) || !(target as GestureViewHolder<*>).canDrag()) {
             return false
         }
-        /*if (firstItemBlocked) {
-            if (target.adapterPosition == 0) {
-                return false
-            }
-        }
-        if (secondItemBlocked) {
-            if (target.adapterPosition == 1) {
-                return false
-            }
-        }
-        if (thirdItemBlocked) {
-            if (target.adapterPosition == 2) {
-                return false
-            }
-        }*/
         return gestureAdapter.onItemMove(source.adapterPosition, target.adapterPosition)
     }
 
