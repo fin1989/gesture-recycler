@@ -13,12 +13,6 @@ import com.thesurix.gesturerecycler.LayoutFlags.*
  */
 class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *>) : ItemTouchHelper.Callback() {
 
-    /** Flag that is blocking first item, so other could not be moved over it*//*
-    var firstItemBlocked = false
-    *//** Flag that is blocking first item, so other could not be moved over it*//*
-    var secondItemBlocked = false
-    *//** Flag that is blocking first item, so other could not be moved over it*//*
-    var thirdItemBlocked = false*/
     /** List of Items to blocked on their positions*/
     var listOfBlockedItems = arrayListOf<Int>()
     /** Flag that enables or disables swipe gesture  */
@@ -43,14 +37,14 @@ class GestureTouchHelperCallback(private val gestureAdapter: GestureAdapter<*, *
     }
 
     override fun onMove(recyclerView: RecyclerView, source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        if (listOfBlockedItems.contains(target.adapterPosition) || !(target as GestureViewHolder<*>).canDrag()) {
+        if (listOfBlockedItems.contains(target.bindingAdapterPosition) || !(target as GestureViewHolder<*>).canDrag()) {
             return false
         }
-        return gestureAdapter.onItemMove(source.adapterPosition, target.adapterPosition)
+        return gestureAdapter.onItemMove(source.bindingAdapterPosition, target.bindingAdapterPosition)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        gestureAdapter.onItemDismissed(viewHolder.adapterPosition)
+        gestureAdapter.onItemDismissed(viewHolder.bindingAdapterPosition)
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {

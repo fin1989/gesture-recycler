@@ -78,7 +78,9 @@ abstract class BaseMonthViewHolder(rootView: View) : GestureViewHolder<MonthItem
         }
     }
 
-    override fun canDrag() = true
+    override fun canDrag() : Boolean {
+        return bindingAdapterPosition != 0 && bindingAdapterPosition != 1
+    }
 
     override fun canSwipe() = true
 
